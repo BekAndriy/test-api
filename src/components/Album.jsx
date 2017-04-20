@@ -41,20 +41,11 @@ export class Album extends React.Component {
 
     componentDidMount() {
         let grid = document.getElementsByClassName('grid-wrap')[0];
-        imagesLoaded( grid , () => {
-            this.msnry = new Masonry( grid, {
-                itemSelector: '.single-photo',
-                gutter: 0,
-                transitionDuration: '0.0s'
-            });
-        });
+
     }
 
     componentDidUpdate() {
-          imagesLoaded( document.getElementsByClassName('grid-wrap')[0], () => {
-            this.msnry.reloadItems();
-            this.msnry.layout();
-        });
+
 
     }
 
