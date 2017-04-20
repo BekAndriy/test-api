@@ -1,11 +1,12 @@
 import React from 'react';
-
 import PropTypes from 'prop-types';
 import imagesLoaded from 'imagesloaded';
 import InfiniteScroll from 'react-infinite-scroller';
-
+import Masonry from 'masonry-layout';
+import actions from './common.js';
+import $ from 'jquery';
+imagesLoaded.makeJQueryPlugin( $ );
 require('./Album.less');
-
 
 export class Album extends React.Component {
     
@@ -20,33 +21,37 @@ export class Album extends React.Component {
     }
 
     componentWillMount() {
-         $.ajax({
-            url: 'https://jsonplaceholder.typicode.com/photos?albumId=' + this.context.router.params.id,
-            type: 'GET',
-            success: (data, textStatus, XMLHttpRequest) => {
-                if (data) {
-                    let photoShow = data.slice(0, 20);
+         actions.getPhotos(this.context.router.params.id, (data) =>{
+             let photoShow = data.slice(0, 20);
 
-                    this.setState({
-                        album: data,
-                        photoShow
-                    })
-                }
-            },
-            error: function(err){
-                console.log('ERROR: ', err);
-            }
-        })
+            this.setState({
+                album: data,
+                photoShow
+            })
+         })
     }
 
     componentDidMount() {
         let grid = document.getElementsByClassName('grid-wrap')[0];
-
+        imagesLoaded( '.album-wrapper' , () => {
+            console.log('componentDidMount: ')
+            this.msnry = new Masonry( grid, {
+                itemSelector: '.single-photo',
+                gutter: 0,
+                transitionDuration: '0.3s'
+            });
+        });
     }
 
     componentDidUpdate() {
-
-
+        
+        if (this.msnry && this.state.album.length && this.state.photoShow) {
+            imagesLoaded( '.album-wrapper', () => {
+                console.log('componentDidUpdate: ')
+                this.msnry.reloadItems();
+                this.msnry.layout();
+            });
+        }
     }
 
     handleShowPhotos(el) {
@@ -54,7 +59,6 @@ export class Album extends React.Component {
     }
 
     handleLoadMore() {
-        console.log('Run')
         let photoOnPage = this.state.photoShow.length;
         if (photoOnPage) {
             let newData = this.state.album.slice(0, photoOnPage + 19 )
@@ -63,7 +67,7 @@ export class Album extends React.Component {
     }
 
     render(){
-
+        
         return (
             <div className="album-wrapper">
                 <InfiniteScroll 
@@ -77,6 +81,7 @@ export class Album extends React.Component {
                     <div className="grid-wrap" >
                         { this.state.photoShow.length ? 
                             this.state.photoShow.map((el, ind) => {
+                                let photo = actions.replaceUrl(el.thumbnailUrl);
                                 return (
                                     <div 
                                         className="single-photo" 
@@ -84,7 +89,7 @@ export class Album extends React.Component {
                                         onClick={this.handleShowPhotos.bind(null, el)}
                                     >
                                         <div className="image">
-                                            <img src={el.thumbnailUrl} />
+                                            <img src={photo} alt="" />
                                         </div>
                                         <div className="title">{el.title}</div>
                                     </div>

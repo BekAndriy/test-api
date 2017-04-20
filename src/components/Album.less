@@ -3,7 +3,21 @@
         display: inline-block;
         width: 50%;
         text-align: center;
+        padding: 15px;
+        box-sizing: border-box;
+        @media (min-width: 600px) {
+            width: 33.3%;
+        }
+        .title {
+            font-size: 14px;
+        }
         .image {
+            img {
+                width: 100%;
+                -webkit-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.36);
+                -moz-box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.36);
+                box-shadow: 1px 1px 5px 0px rgba(0,0,0,0.36);
+            }
         }
     }
 }

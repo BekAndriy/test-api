@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+import $ from 'jquery';
+import actions from './common.js';
 require('./Photo.less');
 
 export class Photo extends React.Component {
@@ -13,29 +14,20 @@ export class Photo extends React.Component {
     }
 
     componentWillMount() {
-         $.ajax({
-            url: 'https://jsonplaceholder.typicode.com/photos/' + this.context.router.params.id,
-            type: 'GET',
-            success: (data, textStatus, XMLHttpRequest) => {
-                if (data) {
-                    this.setState({
-                        photos: data,
-                    })
-                }
-            },
-            error: function(err){
-                console.log('ERROR: ', err);
-            }
-        })
+         actions.getPhoto(this.context.router.params.id, (data) => {
+            this.setState({
+                photos: data,
+            })
+         })
     }
 
     render(){
-        let photo = this.state.photos
-
+        let data = this.state.photos;
+        let photo = actions.replaceUrl(this.state.photos.url);
         return (
-            <div className="photo-content" key={photo.id}>
-              <div className="image"><img src={photo.url} alt="" /></div>
-              <div className="title">{photo.title}</div>
+            <div className="photo-content" key={data.id}>
+              <div className="image"><img src={photo} alt="" /></div>
+              <div className="title">{data.title}</div>
             </div>  
         )
     }
@@ -44,3 +36,4 @@ export class Photo extends React.Component {
 Photo.contextTypes = {
   router: PropTypes.object.isRequired
 };
+

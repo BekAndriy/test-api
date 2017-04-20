@@ -10,7 +10,7 @@ export class Footer extends React.Component {
         return (
             <footer>
                 <div className="copyright">
-            		<span>© {CURRENT_YEAR} Auction. All Rights Reserved </span>
+            		<span>© {CURRENT_YEAR} Test. All Rights Reserved | Andriy Bek </span>
             	</div>
             </footer>  
         )

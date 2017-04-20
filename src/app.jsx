@@ -7,7 +7,8 @@ import { Header } from './components/Header.jsx';
 import { Body } from './components/Body.jsx';
 import { Album } from './components/Album.jsx';
 import { Photo } from './components/Photo.jsx';
-require('./components/Common.less')
+require('./components/Common.less');
+import $ from 'jquery';
 
 export class App extends React.Component {
   render(){
@@ -24,10 +25,3 @@ export class App extends React.Component {
         ) 
     }
 }
-
- /*<Route name='Album name' path='photos?albumId=:id' component={Gallery}>
-                            <Route name='Photo name' path='photos?albumId=:id' component={Gallery}>
-                            </ Route>
-                        </ Route>*/
-
-                        /**/
