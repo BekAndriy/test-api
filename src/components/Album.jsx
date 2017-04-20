@@ -45,7 +45,7 @@ export class Album extends React.Component {
             this.msnry = new Masonry( grid, {
                 itemSelector: '.single-photo',
                 gutter: 0,
-                transitionDuration: '0.5s'
+                transitionDuration: '0.0s'
             });
         });
     }
@@ -64,9 +64,10 @@ export class Album extends React.Component {
 
     handleLoadMore() {
         console.log('Run')
-        if (this.state.photoShow.length) {
-            let photoOnPage = this.state.photoShow.length;
-            this.setState({photoShow: this.state.album.slice(0, photoOnPage + 20 )})
+        let photoOnPage = this.state.photoShow.length;
+        if (photoOnPage) {
+            let newData = this.state.album.slice(0, photoOnPage + 19 )
+            this.setState({photoShow: newData})
         }
     }
 
@@ -77,7 +78,7 @@ export class Album extends React.Component {
                 <InfiniteScroll 
                     style={{width: '100%'}} 
                     hasMore={true}
-                    threshold={700}
+                    threshold={500}
                     initialLoad={false}
                     loadMore={this.handleLoadMore}
                     id="itemGrid"
