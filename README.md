@@ -18,8 +18,8 @@ https://jsonplaceholder.typicode.com/photos/<ID> - фотографія
 
 
 DONE
-    \nLive:  https://bekandriy.github.io/test/#/albums
-    \nCode:  https://github.com/BekAndriy/test-api
+    Live:  https://bekandriy.github.io/test/#/albums
+    Code:  https://github.com/BekAndriy/test-api
 
 USED
     | react
