@@ -18,16 +18,16 @@ https://jsonplaceholder.typicode.com/photos/<ID> - фотографія
 
 
 DONE
-    Live:  https://bekandriy.github.io/test/#/albums
-    Code:  https://github.com/BekAndriy/test-api
+    \nLive:  https://bekandriy.github.io/test/#/albums
+    \nCode:  https://github.com/BekAndriy/test-api
 
 USED
-    react
-    jquery
-    es6
-    redux
-    react-router
-    less
-    material-ui
-    masonry-layout
+    | react
+    | jquery
+    | es6
+    | redux
+    | react-router
+    | less
+    | material-ui
+    | masonry-layout
     
