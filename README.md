@@ -31,3 +31,9 @@ USED
     | material-ui
     | masonry-layout
     
+
+TO RUN
+npm install
+npm run dev
+BUILD
+npm prod
