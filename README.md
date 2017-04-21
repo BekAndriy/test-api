@@ -32,8 +32,5 @@ USED
     | masonry-layout
     
 
-TO RUN
-npm install
-npm run dev
-BUILD
-npm prod
+TO RUN | npm install | npm run dev
+
